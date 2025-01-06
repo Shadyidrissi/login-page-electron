@@ -1,0 +1,67 @@
+#loginForm{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    /* background-image: url(); */
+}
+#image-avatar{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    margin: 20px 0;
+}
+#loginForm>span{
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 600;
+}
+#email,#password{
+    height: 40px;
+    width: 300px;
+    margin-bottom: 10px;
+    border: 1.5px solid black;
+    border-radius: 5px;
+    font-size: 18px;
+}
+#loginForm>button{
+    padding: 5px 10px;
+    border: 1px solid black;
+    font-size: 18px;
+    border-radius: 6px;
+    font-weight: 700;
+    background-color: white;
+    cursor: pointer;
+}
+#loginForm>button:hover{
+    background-color: black;
+    color: white;
+}
+.header{
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgba(219, 219, 219, 0.473);
+    border-radius: 10px;
+}
+.header>p{
+    font-size: 20px;
+    font-weight: 700;
+}
+.header>button{
+    font-size: 16px;
+    font-weight: 600;
+    color: red;
+    border: 2px solid red;
+    background-color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.header>button:hover{
+    background-color: red;
+    color: white;
+}

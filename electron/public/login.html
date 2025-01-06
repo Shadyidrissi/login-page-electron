@@ -1,46 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-</head>
-<body>
-    <form id="loginForm" style="height: 100%;width: 100%;display: flex;justify-content: center;align-items: center;flex-direction: column;">
-        <input type="text" placeholder="Email" name="email" id="email" style="margin: 20px 0;width: 300px;height: 40px;" required>
-        <input type="password" placeholder="Password" name="password" id="password" style="margin: 20px 0;width: 300px;height: 40px;" required>
-        <button type="submit" style="margin: 20px 0;padding: 5px 10px;border: 2px solid black;border-radius: 10px;font-size: 20px;font-weight: 700; cursor: pointer;background-color: white;">Login</button>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form id="loginForm">
+      <img
+        src="https://png.pngtree.com/png-vector/20191003/ourmid/pngtree-user-login-or-authenticate-icon-on-gray-background-flat-icon-ve-png-image_1786166.jpg"
+        id="image-avatar"
+        alt=""
+      />
+      <span>Email</span>
+      <input type="text" placeholder="Email" name="email" id="email" required />
+      <span>Password</span>
+      <input type="password" placeholder="Password" name="password" id="password" required />
+      <button type="submit">Login</button>
     </form>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', async function (e) {
-            e.preventDefault(); // Prevent the form from submitting
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault(); // Prevent the form from submitting
 
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
 
-            try {
-                const response = await fetch('http://localhost:3000/login', { // تأكد من URL
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email, password }),
-                });
+          try {
+            const response = await fetch("http://localhost:3000/login", {
+              // تأكد من URL
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ email, password }),
+            });
 
-                const data = await response.json();
+            const data = await response.json();
 
-                if (response.ok) {
-                    // إذا كان التسجيل ناجحًا، أرسل إشعارًا إلى Main Process للانتقال إلى صفحة المستخدم
-                    window.electronAPI.onLoginSuccess();
-                } else {
-                    alert(data.error || 'Login failed');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('An error occurred. Please try again later.');
+            if (response.ok) {
+              // إذا كان التسجيل ناجحًا، أرسل إشعارًا إلى Main Process للانتقال إلى صفحة المستخدم
+              window.electronAPI.onLoginSuccess();
+            } else {
+              alert(data.error || "Login failed");
             }
+          } catch (error) {
+            console.error("Error:", error);
+            alert("An error occurred. Please try again later.");
+          }
         });
     </script>
-</body>
+  </body>
 </html>
