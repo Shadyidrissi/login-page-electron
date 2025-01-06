@@ -1,23 +1,66 @@
 <!DOCTYPE html>
 <html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>صفحة المستخدم</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="header">
-        <p>Dashborad</p>
-        <button id="logout">LogOut</button>
+      <p>Dashborad</p>
+      <ul>
+        <a href="">Add</a>
+        <a href="">All</a>
+        <a href="">Search</a>
+      </ul>
+      <button id="logout">LogOut</button>
+    </div>
+    <div id="data-container">
+      <!-- سيتم عرض البيانات هنا -->
     </div>
 
     <script>
-        // تسجيل الخروج
-        document.getElementById('logout').addEventListener('click', () => {
-            // إعادة التوجيه إلى صفحة تسجيل الدخول
-            window.location.href = 'login.html';
-        });
+      // تحميل البيانات عند تحميل الصفحة
+      document.addEventListener("DOMContentLoaded", async () => {
+        try {
+          const response = await fetch("http://localhost:3000/all_users", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const users = await response.json(); // البيانات هي مصفوفة مباشرة
+          console.log("Users fetched:", users);
+
+          const container = document.getElementById("data-container");
+          if (users.length === 0) {
+            container.textContent = "لا توجد بيانات لعرضها.";
+            return;
+          }
+
+          users.forEach((user) => {
+            const userDiv = document.createElement("div");
+            userDiv.textContent = `ID: ${user.id}, Name: ${user.username}, Email: ${user.email}`;
+            userDiv.classList.add("user-item"); // يمكنك إضافة تنسيقات
+            container.appendChild(userDiv);
+          });
+        } catch (error) {
+          console.error("Error fetching users:", error);
+          alert("حدث خطأ. حاول مرة أخرى لاحقًا.");
+        }
+      });
+
+      // تسجيل الخروج
+      document.getElementById("logout").addEventListener("click", () => {
+        // إعادة التوجيه إلى صفحة تسجيل الدخول
+        window.location.href = "login.html";
+      });
     </script>
-</body>
+  </body>
 </html>

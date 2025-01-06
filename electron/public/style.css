@@ -65,3 +65,36 @@
     background-color: red;
     color: white;
 }
+
+/* تصميم الحاوية */
+#data-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* تصميم العناصر */
+  .user-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .user-item:hover {
+    background-color: #e9ecef;
+    border-color: #ccc;
+  }
+  
+  /* نص عند عدم وجود بيانات */
+  #data-container:empty::before {
+    content: "لا توجد بيانات لعرضها.";
+    color: #777;
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+  }

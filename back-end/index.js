@@ -13,6 +13,18 @@ const prisma = new PrismaClient();
 require('dotenv').config();
 app.use(express.json());
 
+app.get('/all_users', async (req, res) => {
+    try {
+        const data = await prisma.user.findMany();
+
+        // استجابة مع بيانات المستخدمين
+        res.status(200).json(data); // إرجاع قائمة مباشرة
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
 app.post('/create_user', async(req, res) => {
     try {
         const { username, email ,password} = req.body;
